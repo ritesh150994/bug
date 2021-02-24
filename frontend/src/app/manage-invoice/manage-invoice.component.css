@@ -1,0 +1,28 @@
+.container {
+  margin-top: 40px;
+}
+
+table {
+  width: 100%;
+  height: auto;
+  margin-top: 30px;
+}
+
+/* .actions {
+  padding: 15px;
+  border-bottom-width: 4px;
+}
+
+.amount {
+  padding-right: 0;
+} */
+
+.createButton {
+  float: right;
+  margin-top: 10px;
+}
+
+.search {
+  margin-top: 20px;
+  margin-left: 40%;
+}

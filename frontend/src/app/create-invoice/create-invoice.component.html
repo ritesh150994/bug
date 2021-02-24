@@ -1,0 +1,241 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+
+    <span><a href="/home">HOME</a></span>
+    <span class="spacer"></span>
+
+    <a mat-button routerLink="/login">Login</a>
+    <a mat-button routerLink="/create-invoice">create invoice</a>
+    <a mat-button routerLink="/manage-invoice">manage invoice</a>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container bg-light">
+  <div>
+       <hr>
+    <h3>Create invoice</h3>
+    <hr>
+  </div>
+    <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+      <div class="col-md-12">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-4">
+              <span class="input-group-text bg-white border-0-dark">created by</span>
+            </div>
+            <select formControlName="createdBy">
+              <option>Select Creator</option>
+              <option>SocialEngineAddOns</option>
+              <option>Prime Messenger / Channelize.io</option>
+              <option>AlmaHub</option>
+              <option>MageCube</option>
+            </select>
+          </div>
+         </div>
+      
+         <div class="col-md-12 mt-4">
+          <label class="col-md-4" for="name">Name(Bill to:)</label>
+          <input class="col-md-5" type="text" id="name" formControlName="name">
+         </div>
+         <div class="col-md-12 mt-2">
+          <label class="col-md-4" for="address">Address</label>
+          <input class="col-md-6" type="text" id="address" formControlName="address">
+         </div>
+         <div class="col-md-12 mt-2">
+          <label class="col-md-4" for="contact">Contact number</label>
+          <input class="col-md-6" type="text" id="contact" formControlName="contactNumber">
+         </div>
+         <div class="col-md-12 mt-2">
+          <label class="col-md-4" for="email">Email</label>
+          <input class="col-md-6" type="text" id="email" placeholder="example@gmail.com" formControlName="email">
+         </div>
+       </div>
+     
+        <div class="col-md-6">
+          
+          <div class="col-md-12">
+            <label class="col-md-4" for="invoice-number">Invoice Number</label>
+            <input class="col-md-8" type="text" id="invoice-number" formControlName="invoiceNumber">
+          </div>
+          <div class="col-md-12 mt-4">
+            <label class="col-md-4" for="invoice-date">Invoice Date</label>
+            <input class="col-md-8" type="date" id="invoice-date" formControlName="invoiceDate">
+          </div>
+        
+          <div class="row col-md-12 mt-5">
+            <div class="col-md-2"></div>
+            <div class="row col-md-10">
+              <div class="col-md-6">
+                <select class="form-control" formControlName="currency">
+                  <option>USD</option>
+                  <option>INR</option>
+                </select>
+              </div>
+              <div class="col-md-5" *ngIf="createForm.get('currency').value==='INR'">
+                <select class="form-control" formControlName="state">
+                  <option>Haryana</option>
+                  <option>Out of Haryana</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<hr>
+
+          <div class="form row m-2" formArrayName="products">
+            <div class="row" *ngFor="let productctrl of controls; let i=index" [formGroupName]="i">
+
+              <div class="col-md-3">
+                <input type="text" class="form-control" placeholder="product-name" formControlName="name">
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" placeholder="product-qty" formControlName="qty">
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" placeholder="product-price" formControlName="price">
+              </div>
+             
+                <div class="col-md-3">
+                  <button class="btn btn-danger" (click)="onDelete(i)"><i class="fa fa-trash"></i></button>
+                </div>
+                
+            </div>
+          </div>
+
+
+
+          <div class="col-md-12">
+            <div class="col-md-12">
+              <table class="table mt-5">
+                <thead class="table table-borderless">
+                  <tr>
+                    <th style="width:20%">Description</th>
+                    <th style="width:20%">Quantity</th>
+                    <th style="width:20%">Price</th>
+                    <th style="width:20%">Amount</th>
+                  </tr>
+                </thead>
+                <tbody class="table table-bordered">
+                  <tr *ngFor="let product of createForm.value.products; let i=index">
+                    <th style="height:60px;width:35%">{{product.name}}</th>
+                    <td style="height:60px;width:10%">{{product.qty}}</td>
+                    <td style="height:60px;width:10%">{{product.price}}</td>
+                    <td style="height:60px;width:20%">{{product.qty * product.price}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+       
+    
+
+          <div class="ml-5">
+            <button style="font-size:24px btn" type="button"><i class="fa fa-plus" (click)="addProduct()"> Click here to add
+                products
+              </i></button>
+          </div>
+          <hr>
+
+          <div class="row invoice_details">
+            <div class="col-4 offset-1 pt-3">
+              <button class="btn btn-success" type="button" (click)="getTotal()">Total Amount</button>
+              <h4 class="gray-ish">Invoice Summary & Notes</h4>
+              <p class="pt-3 almost-gray">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras purus sapien,
+                ullamcorper quis orci eu, consectetur congue nulla. In a fermentum est, ornare maximus neque. Phasellus
+                metus risus,.</p>
+            </div>
+            <div class="offset-1 col-5 mb-3 pr-4 sub-table">
+              
+              <table class="table">
+                <tbody class="table table-border">
+                  <tr class="table table-border" *ngIf="createForm.get('currency').value==='INR'">
+                    <th scope="row gray-ish">Subtotal</th>
+                    <td class="text-right">{{subtotal}} <span class="currency">&#36;</span></td>
+                  </tr>
+                  <tr *ngIf="createForm.get('currency').value==='INR'">
+                    <th scope="row gray-ish">Discount</th>
+                    <td class="text-right">{{discount}} <span class="currency">&#36;</span></td>
+                  </tr>
+                  <tr *ngIf="createForm.get('currency').value==='INR' && createForm.get('state').value==='Haryana'">
+                    <th scope="row gray-ish">CGST@9%</th>
+                    <td class="text-right">{{CGST}} <span class="currency">&#36;</span></td>
+                  </tr>
+                  <tr *ngIf="createForm.get('currency').value==='INR' && createForm.get('state').value==='Haryana'">
+                    <th scope="row gray-ish">SGST@9%</th>
+                    <td class="text-right">{{SGST}} <span class="currency">&#36;</span></td>
+                  </tr>
+                  <tr *ngIf="createForm.get('currency').value==='INR' && createForm.get('state').value==='Out of Haryana'">
+                    <th scope="row gray-ish">IGST@18%</th>
+                    <td class="text-right">{{IGST}} <span class="currency">&#36;</span></td>
+                  </tr>
+                  <tr class="last-row">
+                    <th scope="row">Total</th>
+                    <td class="text-right">
+                      <h4><span class="currency">&#36; </span> {{total}}</h4>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <p class="text-center pb-3"><em> Taxes will be calculated in &#36; regarding transport and other taxable
+              services.</em></p>
+
+
+
+
+          <div class="col-md-12 ml-5">
+            <div class="row">
+              <div class="col-md-6">
+                <br>
+                <p></p>
+                <p><b>PAN Number</b> DDABC0760F</p>
+                <p><b>GST Number</b> 12ABCDE0120F1X1</p>
+                <p><b>LUT Number</b> 154/CGST/Division-North/GGN/2020-2021-date-02-04-21</p>
+              </div>
+              <div class="col-md-6">
+                <label for="points"><b>Points To Remember</b></label><br>
+                <textarea name="text" id="points" cols="30" rows="5"></textarea>
+              </div>
+            </div>
+          </div>
+          <br><br><br>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-6"></div>
+              <div class="col-md-6">
+                
+                <button class="btn btn-primary col-md-3" type="submit">Submit</button>
+
+              </div>
+
+            </div>
+          </div>
+      
+
+       
+    </form>
+  
+    <br><br><br><br><br><br><br>
+    <hr>
+    <div class="col-md-12 ml-5">
+      <div class="row">
+      <div class="col-md-6">
+        <P><b>BigStep Technologies Private Limited.</b> </P>
+        <p>Judicial Complex Sector 15</p>
+        <p>Gurgaon-122001,Haryana,India</p>
+        <p>Email:info@bigsteptech.com</p>
+        <p>CIN:U72200HR2009PTC038717</p>
+      </div>
+      <div class="col-md-6 pl-5">
+        <p>2nd Floor,SCO-63,</p>
+        <p>Phone:- +91-9136773059</p>
+        <p>http://www.bigsteptech.com</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <!--  <span>HOME</span> -->
+       <span> <a mat-button routerLink="/home">Go Back</a></span>
+       <span class="spacer"></span>
+      
+       <a mat-button routerLink="/login">Login</a>
+    </mat-toolbar-row>
+ </mat-toolbar>
+
+
+ <div class="main-div mat-card-cvr">
+ 
+ <mat-card>
+   <h1 class="mat-h1">Create User</h1>
+<mat-card-content>
+    <form class="my-form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+       <mat-form-field class="full-width">
+              <mat-label>Name</mat-label>
+              <input  matInput  placeholder="name"  name="name" formControlName="name">
+           </mat-form-field>
+           <mat-form-field class="full-width">
+              <mat-label>Email</mat-label>
+              <input  matInput  placeholder="Email" name="email" formControlName="email">
+           </mat-form-field>
+           <mat-form-field class="full-width">
+              <mat-label>Password</mat-label>
+              <input  matInput  placeholder="Password"  name="password" formControlName="password">
+           </mat-form-field>
+           <mat-form-field class="full-width">
+            <mat-label>Select your position..</mat-label>
+            <mat-select formControlName="options" disableRipple>
+               <mat-option [value]="team" *ngFor="let team of teams">{{team}}</mat-option>
+              
+             </mat-select>
+          </mat-form-field>
+
+          <mat-card-actions>
+            <button mat-raised-button color="primary">REGISTER</button>
+          </mat-card-actions>
+          
+    </form>
+  </mat-card-content>
+</mat-card>
+</div>

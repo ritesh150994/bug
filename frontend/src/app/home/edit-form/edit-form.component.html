@@ -1,0 +1,52 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <!--  <span>HOME</span> -->
+       <span><a routerLink="/home">HOME</a></span>
+       <span class="spacer"></span>
+       <a mat-button routerLink="/register">Register</a>
+       <a mat-button routerLink="/login">Login</a>
+    </mat-toolbar-row>
+ </mat-toolbar>
+
+
+ <div class="main-div mat-card-cvr">
+ 
+   <mat-card>
+      <h1 class="mat-h1">Edit User</h1>
+ <mat-card-content>
+    <form class="my-form" [formGroup]="updateForm" (ngSubmit)="onUpdate(id)">
+       <mat-form-field class="full-width">
+              <mat-label>Name</mat-label>
+              <input  matInput 
+               placeholder="name"  
+               name="name" 
+               formControlName="name"
+               required>
+           </mat-form-field>
+           <mat-form-field class="full-width">
+              <mat-label>Email</mat-label>
+              <input  matInput  placeholder="Email" 
+              formControlName="email"
+              name="email">
+           </mat-form-field>
+           <mat-form-field class="full-width">
+              <mat-label>Password</mat-label>
+              <input  matInput  placeholder="Password"  
+              formControlName="password"
+              name="password">
+           </mat-form-field>
+           <mat-form-field>
+            <mat-label>Select your position</mat-label>
+            <mat-select disableRipple>
+              <mat-option [value]="team" *ngFor="let team of teams">{{team}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+          <mat-card-actions>
+            <button mat-raised-button color="primary">UPDATE</button>
+          </mat-card-actions>
+    </form>
+  </mat-card-content>
+</mat-card>
+</div>
+ 

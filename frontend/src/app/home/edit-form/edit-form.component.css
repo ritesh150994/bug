@@ -1,0 +1,38 @@
+/* .my-form{
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .full-width {
+    width: 100%;
+  } */
+
+mat-card-content {
+  padding-top: 6px;
+}
+
+mat-card {
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  margin-top: 8%;
+}
+.mat-card-cvr {
+  width: 100%;
+}
+
+table {
+  width: 50%;
+  margin: 100px;
+  margin-left: 20%;
+}
+
+.container {
+  width: 60%;
+  margin-left: 50px;
+}
+
+.mat-h1 {
+  margin-top: 5px;
+}

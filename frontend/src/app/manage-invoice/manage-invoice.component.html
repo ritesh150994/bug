@@ -1,0 +1,124 @@
+
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <!--  <span>HOME</span> -->
+       <span><a routerLink="/home">HOME</a></span>
+       <span class="spacer"></span>
+       <a mat-button (click)="onLogOut()">Logout</a>
+       <a mat-button routerLink="/create-invoice">create invoice</a>
+       <a mat-button routerLink="/manage-invoice">manage invoice</a>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+
+  
+  
+  <div class="mat-elevation-z8 container">
+
+    <button mat-stroked-button class="createButton" color="primary" (click)='Create()' float-right> <i class="fa fa-plus" style="font-size:24px"></i> New Create-invoice</button>
+    <div class="col-md-12">
+      <input type="search" class="search" placeholder="search invoice" (keyup)="search($event)">
+    </div>
+      <table mat-table [dataSource]="dataSource" matSort>
+      
+        <!-- checkbox Column -->
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null"
+                          [checked]="selection.hasValue() && isAllSelected()"
+                          [indeterminate]="selection.hasValue() && !isAllSelected()"
+                       >
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? selection.toggle(row) : null"
+                          [checked]="selection.isSelected(row)"
+                       >
+            </mat-checkbox>
+          </td>
+        </ng-container>
+        <!-- Name Column -->
+
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.invoiceDate.slice(0,10)}} </td>
+        </ng-container>
+    
+        <!-- Weight Column -->
+        <ng-container matColumnDef="invoice">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Invoice </th>
+          <td mat-cell *matCellDef="let element"> {{element.invoiceNumber}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="recipient">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> Recipient </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="creator">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> Creator </th>
+          <td mat-cell *matCellDef="let element"> {{element.user.name}} </td>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+        </ng-container> -->
+
+        
+    
+          <!-- Get Details -->
+          <ng-container matColumnDef="actions" class="actions">
+              <th mat-header-cell *matHeaderCellDef  mat-sort-header> actions </th>
+              <td mat-cell *matCellDef="let element">  
+                <button mat-button color="primary" (click)="onEdit(element._id)">Edit</button> |  
+                  <button mat-button color="warn" (click)="onDelete(element._id)">delete</button>|
+                  <!-- <button mat-button color="" (click)="onCopy(element._id)">Copy</button>| -->
+                  <button mat-button color="accent" (click)="onDownload(element._id)">Download</button>
+                  
+                </td>
+            </ng-container>
+       
+            <ng-container matColumnDef="amount" class="actions">
+                <th mat-header-cell *matHeaderCellDef  mat-sort-header> Amount </th>
+                <td mat-cell *matCellDef="let element"> {{element.totalPrice}} </td>
+              </ng-container>
+         
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        
+
+      </table>
+    
+
+      <mat-paginator #paginator
+      showFirstLastButtons
+      [pageIndex]="0" 
+      [pageSize]="5"
+      [pageSizeOptions]="[5, 10, 25, 100]">
+     </mat-paginator>
+
+
+
+        
+    <br><br><br><br><br><br><br>
+    <hr>
+    <div class="col-md-12 ml-5">
+      <div class="row">
+      <div class="col-md-6">
+        <P><b>BigStep Technologies Private Limited.</b> </P>
+        <p>Judicial Complex Sector 15</p>
+        <p>Gurgaon-122001,Haryana,India</p>
+        <p>Email:info@bigsteptech.com</p>
+        <p>CIN:U72200HR2009PTC038717</p>
+      </div>
+      <div class="col-md-6 pl-5">
+        <p>2nd Floor,SCO-63,</p>
+        <p>Phone:- +91-9136773059</p>
+        <p>http://www.bigsteptech.com</p>
+      </div>
+    </div>
+  </div>
+    </div>
+  

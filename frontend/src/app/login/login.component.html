@@ -1,0 +1,34 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <!--  <span>HOME</span> -->
+       <span><a routerLink="/home">HOME</a></span>
+       <span class="spacer"></span>
+       <a mat-button (click)="onLogOut()">Logout</a>
+       <a mat-button routerLink="/login">Login</a>
+    </mat-toolbar-row>
+ </mat-toolbar>
+
+
+<mat-card>
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <h2>Log In</h2>
+        <!-- <mat-error *ngIf="loginInvalid">
+          The username and password were not recognised
+        </mat-error> -->
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="Email" formControlName="email" required>
+          <!-- <mat-error>
+            Please provide a valid email address
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input matInput type="password" placeholder="Password" formControlName="password" required>
+          <!-- <mat-error>
+            Please provide a valid password
+          </mat-error> -->
+        </mat-form-field>
+        <button mat-raised-button color="primary">Login</button><br><br>
+      </form>
+    </mat-card-content>
+  </mat-card>
